@@ -2,18 +2,13 @@
 
 ## Menetelmä
 
-Käyttäjätarinat kirjoitettiin Hurjan artikkelin mallin mukaan
-[Käyttäjätarinat apuna sovelluksen suunnittelussa tekoälyllä](https://hurja.fi/blogi/kayttajatarinat-apuna-sovelluksen-suunnittelussa-tekoalylla/).
-
 | Vaihe | Mitä tehtiin |
 |---|---|
 | 1 | Määriteltiin persoonat, niiden rooli, tavoite ja haaste |
 | 2 | Kirjoitettiin tarinat mallilla "Käyttäjänä [nimi], haluan [tehdä jotain], jotta [hyöty]" |
 | 3 | Lisättiin konteksti eli käyttötapaus ja käyttäjäpolku |
-| 4 | Tarkistettiin tarinat INVEST-listalla |
-| 5 | Verrattiin tarinoita aineistoon mps.json ja muutettiin ne, joille dataa ei ole |
+| 4 | Verrattiin tarinoita aineistoon mps.json ja muutettiin ne, joille dataa ei ole |
 
-INVEST tarkoittaa, että tarina on Independent, Negotiable, Valuable, Estimable, Small ja Testable.
 
 ## Persoonat
 
@@ -71,15 +66,6 @@ Nämä koskevat koko sovellusta ja otetaan huomioon jokaisessa sprintissä.
 |---|---|
 | 15 | Käyttäjänä Leena, haluan sovelluksen toimivan puhelimella ilman kirjautumista, jotta oppilaat pääsevät heti alkuun. |
 | 17 | Käyttäjänä Raimo, haluan suurentaa fonttikokoa, jotta tekstiä on helppo lukea. |
-
-## INVEST-tarkistus
-
-| Nro | Havainto | Toimenpide |
-|---|---|---|
-| 13 | Liian suuri, ei täytä Small-ehtoa | Jaetaan myöhemmin osiin, esim. kysymys kuvasta ja pisteiden lasku |
-| 19 | Liian suuri, aineistossa ei ole karttakoordinaatteja | Jätetään viimeiseksi |
-| 15, 17 | Ei-toiminnallisia vaatimuksia | Siirretty omaan taulukkoon |
-| 5 | Pieni arvo käyttäjälle | Matala prioriteetti |
 
 ## Muutosloki
 
