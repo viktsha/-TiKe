@@ -70,10 +70,10 @@ Avaa sen jälkeen selaimessa client/index.html.
 
 | Nimi | Rooli |
 |---|---|
-| | Product Owner |
-| | Scrum Master |
-| | Kehittäjä |
-| | Kehittäjä |
+|Majlinda | Product Owner |
+|Victoria | Scrum Master |
+|Majlinda | Kehittäjä |
+|Victoria | Kehittäjä |
 
 ## Aikataulu
 
