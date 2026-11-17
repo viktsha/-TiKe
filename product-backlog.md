@@ -2,8 +2,6 @@
 
 ## Menetelmä
 
-Käyttäjätarinat kirjoitettiin Hurjan artikkelin mallin mukaan
-[Käyttäjätarinat apuna sovelluksen suunnittelussa tekoälyllä](https://hurja.fi/blogi/kayttajatarinat-apuna-sovelluksen-suunnittelussa-tekoalylla/).
 
 | Vaihe | Mitä tehtiin |
 |---|---|
