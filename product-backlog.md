@@ -104,11 +104,3 @@ Nämä koskevat koko sovellusta ja otetaan huomioon jokaisessa sprintissä.
 | 16.11.2026 | 20 | Päivitysaika vaihdettu paikkanumeroksi | Aineistossa ei ole päivityspäivää, seatNumber on |
 | 16.11.2026 | 15, 17 | Siirretty ei-toiminnallisiin vaatimuksiin | Koskevat koko sovellusta |
 | 17.11.2026 | kaikki | Lisätty epiikit ja hyväksymiskriteerit | Backlogin rakenne lähteiden mukaan |
-
-## Lähteet
-
-[Hurja, Käyttäjätarinat apuna sovelluksen suunnittelussa tekoälyllä](https://hurja.fi/blogi/kayttajatarinat-apuna-sovelluksen-suunnittelussa-tekoalylla/)
-
-[AltexSoft, Product Backlog](https://www.altexsoft.com/blog/product-backlog/)
-
-[Eiki Takeuchi, Fundamentals of a Product Backlog Management in Agile](https://medium.com/beyond-agile-leadership/fundamentals-of-a-product-backlog-management-in-agile-1acbddb0151)
