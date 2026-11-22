@@ -17,7 +17,7 @@
 |---|---|---|---|
 | Aino | nuori äänestäjä | ymmärtää eduskuntaa ja oman alueen edustajia | tieto on hajallaan ja vaikeasti ymmärrettävää |
 | Matti | toimittaja | löytää edustajien tiedot nopeasti juttuihin | tiedonhaku vie aikaa |
-| Leena | yhteiskuntaopin opettaja | tehdä oppitunneista kiinnostavia | oppilaat eivät jaksa lukea pitkiä tekstejä |
+| Leena | yhteiskuntatieteiden opiskelija | ymmärtää eduskuntaa opintojaan varten | tieto on hajallaan, ja pitkien raporttien lukeminen vie aikaa |
 | Raimo | eläkeläinen | seurata politiikkaa vaivatta | pieni teksti ja monimutkaiset sivut |
 
 ## Käyttötapaus
@@ -60,15 +60,15 @@ Prioriteetti 1 on tärkein. Arviot ovat alustavia ja tarkentuvat sprinttien aika
 | 6 | 18 | E1 | Käyttäjänä Raimo, haluan järjestää edustajat iän tai nimen mukaan, jotta löydän etsimäni helpommin. | 3 h | Backlog |
 | 7 | 7 | E2 | Käyttäjänä Matti, haluan nähdä, ketkä edustajat ovat ministereitä, jotta tiedän hallituksen kokoonpanon. | 3 h | Backlog |
 | 8 | 8 | E3 | Käyttäjänä Matti, haluan nähdä puolueiden paikkamäärät kaaviona, jotta voin käyttää niitä juttujen taustana. | 6 h | Backlog |
-| 9 | 14 | E3 | Käyttäjänä Leena, haluan nähdä ministerien määrän puolueittain, jotta voimme käsitellä hallituksen ja opposition eroa. | 4 h | Backlog |
-| 10 | 11 | E3 | Käyttäjänä Leena, haluan näyttää eduskunnan ikäjakauman, jotta oppilaat voivat pohtia edustuksellisuutta. | 5 h | Backlog |
-| 11 | 12 | E3 | Käyttäjänä Leena, haluan verrata puolueita rinnakkain, jotta oppitunnilla syntyy keskustelua. | 6 h | Backlog |
+| 9 | 14 | E3 | Käyttäjänä Leena, haluan nähdä ministerien määrän puolueittain, jotta ymmärrän hallituksen ja opposition eron. | 4 h | Backlog |
+| 10 | 11 | E3 | Käyttäjänä Leena, haluan nähdä eduskunnan ikäjakauman, jotta voin käyttää sitä harjoitustyössäni edustuksellisuudesta. | 5 h | Backlog |
+| 11 | 12 | E3 | Käyttäjänä Leena, haluan verrata puolueita rinnakkain, jotta ymmärrän niiden erot. | 6 h | Backlog |
 | 12 | 16 | E2 | Käyttäjänä Raimo, haluan tallentaa suosikkiedustajia, jotta löydän heidät nopeasti uudelleen. | 5 h | Backlog |
-| 13 | 10 | E2 | Käyttäjänä Matti, haluan avata edustajan Twitter-tilin sovelluksesta, jotta voin seurata hänen kannanottojaan ja pyytää haastattelua. | 3 h | Backlog |
+| 13 | 10 | E2 | Käyttäjänä Matti, haluan avata edustajan X-tilin (entinen Twitter) sovelluksesta, jotta voin seurata hänen kannanottojaan ja pyytää haastattelua. | 3 h | Backlog |
 | 14 | 20 | E2 | Käyttäjänä Raimo, haluan nähdä edustajan paikkanumeron istuntosalissa, jotta tiedän, missä hän istuu. | 2 h | Backlog |
 | 15 | 9 | E2 | Käyttäjänä Matti, haluan kopioida edustajan tiedot yhdellä painalluksella, jotta tiedonkeruu nopeutuu. | 2 h | Backlog |
 | 16 | 5 | E4 | Käyttäjänä Aino, haluan lukea lyhyen selityksen eduskunnan toiminnasta, jotta ymmärrän, mitä edustajat tekevät. | 2 h | Backlog |
-| 17 | 13 | E4 | Käyttäjänä Leena, haluan tietovisan kansanedustajista, jotta oppiminen on hauskempaa. | 10 h | Backlog |
+| 17 | 13 | E4 | Käyttäjänä Leena, haluan tietovisan kansanedustajista, jotta eduskunnan opiskelu on hauskempaa. | 10 h | Backlog |
 | 18 | 19 | E3 | Käyttäjänä Raimo, haluan nähdä vaalipiirit kartalla, jotta ymmärrän alueellisen jakautumisen. | 12 h | Backlog |
 
 ## Hyväksymiskriteerit
@@ -91,16 +91,5 @@ Nämä koskevat koko sovellusta ja otetaan huomioon jokaisessa sprintissä.
 
 | Nro | Vaatimus |
 |---|---|
-| 15 | Käyttäjänä Leena, haluan sovelluksen toimivan puhelimella ilman kirjautumista, jotta oppilaat pääsevät heti alkuun. |
-| 17 | Käyttäjänä Raimo, haluan suurentaa fonttikokoa, jotta tekstiä on helppo lukea. |
-
-## Muutosloki
-
-| Päivä | Nro | Muutos | Syy |
-|---|---|---|---|
-| 16.11.2026 | kaikki | Pilkku lisätty nimen jälkeen | Hurjan mallin mukainen muoto |
-| 16.11.2026 | 10 | Yhteystiedot ja somekanavat vaihdettu Twitter-linkiksi | Aineistossa on vain twitter-kenttä |
-| 16.11.2026 | 14 | Sukupuolijakauma vaihdettu ministerien määräksi puolueittain | Aineistossa ei ole sukupuolta |
-| 16.11.2026 | 20 | Päivitysaika vaihdettu paikkanumeroksi | Aineistossa ei ole päivityspäivää, seatNumber on |
-| 16.11.2026 | 15, 17 | Siirretty ei-toiminnallisiin vaatimuksiin | Koskevat koko sovellusta |
-| 17.11.2026 | kaikki | Lisätty epiikit ja hyväksymiskriteerit | Backlogin rakenne lähteiden mukaan |
+| 15 | Käyttäjänä Leena, haluan sovelluksen toimivan puhelimella ilman kirjautumista, jotta voin käyttää sitä esimerkiksi luennolla tai bussissa. |
+| 17 | Käyttäjänä Raimo, haluan, että teksti on riittävän suurta ja selkeää, jotta sitä on helppo lukea. |
