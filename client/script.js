@@ -101,6 +101,48 @@ function kuvapaikka(edustaja) {
   return paikka;
 }
 
+// T8: hakee kuvapienoiskuvan Wikipediasta automaattisesti nimen perusteella.
+// Käytetään vain täsmälleen samalla nimellä löytyvää artikkelia.
+async function haeWikipedianKuva(edustaja, kuvaAlue) {
+  try {
+    const params = new URLSearchParams({
+      action: 'query',
+      prop: 'pageimages',
+      titles: kokoNimi(edustaja),
+      pithumbsize: '480',
+      redirects: '1',
+      format: 'json',
+      origin: '*'
+    });
+    const vastaus = await fetch(`https://fi.wikipedia.org/w/api.php?${params}`);
+    if (!vastaus.ok) return;
+    const data = await vastaus.json();
+    const sivu = Object.values(data.query?.pages || {})[0];
+    if (!sivu?.thumbnail?.source || !sivu?.pageimage) return;
+
+    const kuva = document.createElement('img');
+    kuva.className = 'edustajakuva';
+    kuva.alt = `Kansanedustaja ${kokoNimi(edustaja)}`;
+    kuva.onload = () => {
+      const lahde = document.createElement('a');
+      lahde.href = `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(sivu.pageimage)}`;
+      lahde.textContent = 'Kuva ja tekijätiedot: Wikimedia Commons';
+      lahde.target = '_blank';
+      lahde.rel = 'noopener noreferrer';
+      lahde.style.display = 'block';
+      lahde.style.fontSize = '11px';
+      lahde.style.lineHeight = '1.4';
+      lahde.style.marginTop = '6px';
+      lahde.style.maxWidth = '190px';
+      kuvaAlue.replaceChildren(kuva, lahde);
+    };
+    kuva.src = sivu.thumbnail.source;
+  } catch (virhe) {
+    // Ulkoisen kuvapalvelun virhe ei estä muun tietosivun näyttämistä.
+    console.info('Kuvaa ei saatu Wikipediasta:', virhe);
+  }
+}
+
 function naytaTiedot(edustaja) {
   const kortti = document.createElement('div');
   kortti.className = 'tieto-sisalto';
@@ -108,16 +150,10 @@ function naytaTiedot(edustaja) {
   const varakuva = kuvapaikka(edustaja);
   kuvaAlue.append(varakuva);
 
-  // JSON sisältää suhteellisen kuvapolun. Jos sama kuva löytyy client/
-  // -hakemiston alla, se näytetään. Muutoin näkyy siisti varakuva.
-  if (edustaja.picture && !edustaja.picture.includes('..') && !edustaja.picture.startsWith('/')) {
-    const kuva = document.createElement('img');
-    kuva.className = 'edustajakuva';
-    kuva.alt = `Kansanedustaja ${kokoNimi(edustaja)}`;
-    kuva.src = edustaja.picture;
-    kuva.onload = () => kuvaAlue.replaceChildren(kuva);
-    // Jos kuvatiedostoa ei löydy, varakuva jää näkyviin.
-  }
+  // JSON:in picture-kentässä oleva polku ei sisällä itse kuvaa.
+  // Kokeile siksi hakea julkinen valokuva suomenkielisestä Wikipediasta.
+  // Jos kuvaa ei löydy tai verkkoyhteys ei toimi, nimikirjaimet jäävät näkyviin.
+  haeWikipedianKuva(edustaja, kuvaAlue);
 
   const oikea = document.createElement('div');
   const otsikko = document.createElement('h3');
