@@ -1,0 +1,52 @@
+/* T5: etusivun ulkoasu, responsiivinen myös puhelimella */
+:root { font-family: Arial, Helvetica, sans-serif; color: #1c2636; background: #f7f8fb; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; }
+[hidden] { display: none !important; }
+.sisalto { width: min(920px, 100% - 36px); margin-inline: auto; }
+.ylapalkki { background: #1f3558; color: white; padding: 30px 0 34px; }
+.ylatunniste { color: #d3e0f3; font-size: .85rem; margin: 0 0 9px; }
+h1 { margin: 0; font-size: clamp(1.85rem, 4vw, 2.5rem); }
+.ylapalkki p:last-child { color: #e8ecf5; margin: 10px 0 0; }
+main { padding-block: 28px 36px; }
+h2 { margin: 0 0 5px; font-size: 1.35rem; }
+.osio-otsikko { display: flex; gap: 14px; justify-content: space-between; align-items: flex-start; margin-bottom: 22px; }
+.ohjeteksti { margin: 0; color: #5a6678; font-size: .95rem; }
+.maara { background: #e6eaf4; border-radius: 40px; color: #334d78; font-size: .85rem; padding: 7px 13px; white-space: nowrap; }
+label { display: block; font-weight: 700; margin-bottom: 9px; }
+input { font: inherit; background: #fff; border: 1px solid #c5cddd; border-radius: 9px; padding: 13px 14px; width: 100%; }
+input:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid #76a9ef; outline-offset: 2px; }
+.edustajalista { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; list-style: none; padding: 0; margin: 22px 0 0; }
+.edustajalista li { min-width: 0; }
+.edustaja { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; height: 100%; border: 1px solid #e1e6ef; border-radius: 10px; background: white; padding: 16px; color: inherit; font: inherit; text-align: left; cursor: pointer; box-shadow: 0 1px 3px #162d4711; }
+.edustaja:hover { background: #f1f5fd; border-color: #b6c7e2; }
+.edustaja-nimi { font-weight: 700; display: block; }
+.edustaja-lisatiedot { color: #687588; font-size: .88rem; display: block; margin-top: 4px; }
+.nuoli { color: #70819d; font-size: 1.5rem; }
+.takaisin { color: #264d86; font-weight: 700; display: inline-block; margin-bottom: 19px; text-decoration: none; }
+.takaisin:hover { text-decoration: underline; }
+.tietokortti { background: white; border: 1px solid #e1e6ef; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px #162d4710; }
+.tieto-sisalto { display: flex; align-items: flex-start; gap: 26px; }
+.tieto-sisalto h3 { font-size: 1.65rem; margin: 0 0 17px; }
+.tieto-rivit { display: grid; grid-template-columns: auto 1fr; gap: 11px 20px; margin: 0; }
+.tieto-rivit dt { font-weight: 700; color: #49586c; }
+.tieto-rivit dd { margin: 0; }
+.edustajakuva { display: block; width: 190px; height: 230px; object-fit: cover; border-radius: 10px; background: #e9eef6; }
+.kuvapaikka { width: 190px; min-width: 190px; height: 230px; border-radius: 10px; display: grid; place-content: center; gap: 8px; text-align: center; background: #e9eef6; color: #526887; }
+.kuvapaikka strong { font-size: 2.5rem; }
+.kuvapaikka small { font-size: .8rem; }
+.virhe, .tyhja { padding: 16px; border-radius: 9px; margin: 18px 0; }
+.virhe { color: #82333b; background: #fff0f0; }
+.tyhja { color: #576479; background: #e9eef6; }
+.alatunniste { padding-bottom: 28px; font-size: .8rem; color: #707e90; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@media (max-width: 620px) {
+  .ylapalkki { padding: 23px 0; }
+  .osio-otsikko { flex-wrap: wrap; }
+  .edustajalista { grid-template-columns: 1fr; }
+  .tieto-sisalto { flex-direction: column; }
+  .tietokortti { padding: 18px; }
+  .edustajakuva, .kuvapaikka { width: 160px; min-width: 160px; height: 185px; }
+  .tieto-rivit { grid-template-columns: 1fr; gap: 4px; }
+  .tieto-rivit dd { margin-bottom: 9px; }
+}

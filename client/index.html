@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Selaa kansanedustajia ja tutustu heidän perustietoihinsa.">
+  <title>Kansanedustajat – tietopalvelu</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="ylapalkki">
+    <div class="sisalto">
+      <p class="ylatunniste">Tietojärjestelmien kehittäminen · Sprintti 1</p>
+      <h1>Kansanedustajat</h1>
+      <p>Selaa kansanedustajien tietoja ja avaa edustajan perustiedot.</p>
+    </div>
+  </header>
+
+  <main class="sisalto">
+    <section id="listanakyma" aria-labelledby="listaotsikko">
+      <div class="osio-otsikko">
+        <div>
+          <h2 id="listaotsikko">Edustajat</h2>
+          <p class="ohjeteksti">Valitse edustaja nähdäksesi lisätiedot.</p>
+        </div>
+        <span id="maara" class="maara" aria-live="polite">Ladataan...</span>
+      </div>
+      <label for="haku">Hae nimellä</label>
+      <input id="haku" type="search" placeholder="Kirjoita etu- tai sukunimi" autocomplete="off">
+      <p id="virhe" class="virhe" role="alert" hidden></p>
+      <ul id="edustajalista" class="edustajalista" aria-label="Kansanedustajat"></ul>
+      <p id="tyhja" class="tyhja" hidden>Haulla ei löytynyt edustajia.</p>
+    </section>
+
+    <section id="tietonakyma" aria-labelledby="tieto-otsikko" hidden>
+      <a class="takaisin" href="index.html">← Takaisin edustajiin</a>
+      <h2 id="tieto-otsikko" class="sr-only">Edustajan tiedot</h2>
+      <div id="edustajatiedot" class="tietokortti" aria-live="polite">Ladataan tietoja...</div>
+    </section>
+  </main>
+
+  <footer class="sisalto alatunniste">Lähde: kurssin JSON-aineisto · Tiedot eivät välttämättä vastaa nykyistä eduskuntaa.</footer>
+</body>
+</html>
