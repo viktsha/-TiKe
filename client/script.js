@@ -1,4 +1,5 @@
-// Sprintti 1: T6 (listaus), T8 (tietosivu), T9 (vapaaehtoinen haku).
+// Sprintti 1: T6 (listaus), T8 (tietosivu), T9 (haku).
+// Sprintti 2: T11 (puoluesuodatin), T12 (vaalipiirisuodatin).
 // Tämä toimii muuttamatta ryhmän valmista server/app.py-tiedostoa.
 const API = 'http://127.0.0.1:5000';
 const listanakyma = document.querySelector('#listanakyma');
@@ -9,6 +10,8 @@ const haku = document.querySelector('#haku');
 const virhe = document.querySelector('#virhe');
 const tyhja = document.querySelector('#tyhja');
 const tiedot = document.querySelector('#edustajatiedot');
+const puolueValinta = document.querySelector('#puolue');
+const vaalipiiriValinta = document.querySelector('#vaalipiiri');
 let kaikkiEdustajat = [];
 
 function kokoNimi(edustaja) {
@@ -21,13 +24,21 @@ async function haeJSON(polku) {
   return await vastaus.json();
 }
 
-// T6: hae kaikki edustajat palvelimelta ja muodosta HTML-lista.
+// T6: hae edustajat palvelimelta ja muodosta HTML-lista.
+// T11 ja T12: valittu puolue ja vaalipiiri lähetetään palvelimelle osoitteessa,
+// esim. /edustajat?puolue=kok&vaalipiiri=Helsinki
 async function lataaLista() {
+  const parametrit = new URLSearchParams();
+  if (puolueValinta.value) parametrit.set('puolue', puolueValinta.value);
+  if (vaalipiiriValinta.value) parametrit.set('vaalipiiri', vaalipiiriValinta.value);
+  const polku = parametrit.toString() ? `/edustajat?${parametrit}` : '/edustajat';
+
   try {
-    const data = await haeJSON('/edustajat');
+    const data = await haeJSON(polku);
     if (!Array.isArray(data)) throw new Error('Rajapinta ei palauttanut listaa');
     kaikkiEdustajat = data.sort((a, b) => kokoNimi(a).localeCompare(kokoNimi(b), 'fi'));
-    naytaLista(kaikkiEdustajat);
+    virhe.hidden = true;
+    naytaHaunTulos();
   } catch (error) {
     maara.textContent = 'Lataus epäonnistui';
     virhe.textContent = 'Edustajatietojen lataus epäonnistui. Käynnistä Flask-palvelin komennolla python server/app.py ja päivitä sivu.';
@@ -35,6 +46,27 @@ async function lataaLista() {
     console.error(error);
   }
 }
+
+// T11 ja T12: täytetään valikot aineiston puolueilla ja vaalipiireillä.
+// Tämä tehdään kerran, kun koko lista on ladattu ensimmäisen kerran.
+function taytaValikko(valikko, arvot) {
+  for (const arvo of arvot) {
+    const vaihtoehto = document.createElement('option');
+    vaihtoehto.value = arvo;
+    vaihtoehto.textContent = valikko === puolueValinta ? arvo.toUpperCase() : arvo;
+    valikko.append(vaihtoehto);
+  }
+}
+
+function taytaSuodattimet() {
+  const puolueet = [...new Set(kaikkiEdustajat.map(e => e.party))].sort((a, b) => a.localeCompare(b, 'fi'));
+  const vaalipiirit = [...new Set(kaikkiEdustajat.map(e => e.constituency))].sort((a, b) => a.localeCompare(b, 'fi'));
+  taytaValikko(puolueValinta, puolueet);
+  taytaValikko(vaalipiiriValinta, vaalipiirit);
+}
+
+puolueValinta.addEventListener('change', lataaLista);
+vaalipiiriValinta.addEventListener('change', lataaLista);
 
 function naytaLista(edustajat) {
   lista.replaceChildren();
@@ -69,13 +101,15 @@ function naytaLista(edustajat) {
   }
 }
 
-// T9: nimihaku (lisäominaisuus, voidaan laskea sprinttiin 2).
-haku.addEventListener('input', () => {
+// T9: nimihaku. Haku rajaa sitä listaa, joka on jo haettu palvelimelta.
+function naytaHaunTulos() {
   const sana = haku.value.trim().toLocaleLowerCase('fi');
   naytaLista(kaikkiEdustajat.filter(edustaja =>
     kokoNimi(edustaja).toLocaleLowerCase('fi').includes(sana)
   ));
-});
+}
+
+haku.addEventListener('input', naytaHaunTulos);
 
 // T8: hae yksittäisen edustajan tiedot personNumber-tunnisteella.
 async function lataaTiedot(id) {
@@ -182,7 +216,7 @@ function naytaTiedot(edustaja) {
 }
 
 const tunniste = new URLSearchParams(window.location.search).get('id');
-if (tunniste === null) lataaLista();
+if (tunniste === null) lataaLista().then(taytaSuodattimet);
 else if (/^\d+$/.test(tunniste)) lataaTiedot(tunniste);
 else {
   listanakyma.hidden = true;
