@@ -64,6 +64,52 @@ class TestEdustajat(unittest.TestCase):
         vastaus = self.client.get("/edustajat/abc")
         self.assertEqual(vastaus.status_code, 404)
 
+    # T11, suodatus puolueen mukaan (tarina 4)
+
+    def test_puolue_nayttaa_vain_sen_puolueen(self):
+        edustajat = self.client.get("/edustajat?puolue=kok").get_json()
+        self.assertTrue(len(edustajat) > 0)
+        for e in edustajat:
+            self.assertEqual(e["party"], "kok")
+
+    def test_puolueen_maara_oikein(self):
+        odotettu = len([e for e in self.aineisto if e["party"] == "sd"])
+        edustajat = self.client.get("/edustajat?puolue=sd").get_json()
+        self.assertEqual(len(edustajat), odotettu)
+
+    def test_puolue_isoilla_kirjaimilla(self):
+        pienet = self.client.get("/edustajat?puolue=ps").get_json()
+        isot = self.client.get("/edustajat?puolue=PS").get_json()
+        self.assertEqual(pienet, isot)
+
+    def test_tuntematon_puolue_antaa_tyhjan_listan(self):
+        edustajat = self.client.get("/edustajat?puolue=xyz").get_json()
+        self.assertEqual(edustajat, [])
+
+    def test_tyhja_puolue_nayttaa_kaikki(self):
+        edustajat = self.client.get("/edustajat?puolue=").get_json()
+        self.assertEqual(len(edustajat), len(self.aineisto))
+
+    # T12, suodatus vaalipiirin mukaan (tarina 2)
+
+    def test_vaalipiiri_nayttaa_vain_sen_vaalipiirin(self):
+        edustajat = self.client.get("/edustajat?vaalipiiri=Helsinki").get_json()
+        self.assertTrue(len(edustajat) > 0)
+        for e in edustajat:
+            self.assertEqual(e["constituency"], "Helsinki")
+
+    def test_vaalipiiri_jossa_aakkosia(self):
+        odotettu = len([e for e in self.aineisto if e["constituency"] == "Häme"])
+        edustajat = self.client.get("/edustajat?vaalipiiri=Häme").get_json()
+        self.assertEqual(len(edustajat), odotettu)
+
+    # T11 ja T12 yhdessä
+
+    def test_puolue_ja_vaalipiiri_yhdessa(self):
+        edustajat = self.client.get("/edustajat?puolue=kok&vaalipiiri=Uusimaa").get_json()
+        odotettu = [e for e in self.aineisto if e["party"] == "kok" and e["constituency"] == "Uusimaa"]
+        self.assertEqual(len(edustajat), len(odotettu))
+
     # Selain saa hakea tietoa toisesta osoitteesta
 
     def test_selain_saa_hakea_tietoa(self):

@@ -11,7 +11,7 @@
 <body>
   <header class="ylapalkki">
     <div class="sisalto">
-      <p class="ylatunniste">Tietojärjestelmien kehittäminen · Sprintti 1</p>
+      <p class="ylatunniste">Tietojärjestelmien kehittäminen · Sprintti 2</p>
       <h1>Kansanedustajat</h1>
       <p>Selaa kansanedustajien tietoja ja avaa edustajan perustiedot.</p>
     </div>
@@ -28,6 +28,21 @@
       </div>
       <label for="haku">Hae nimellä</label>
       <input id="haku" type="search" placeholder="Kirjoita etu- tai sukunimi" autocomplete="off">
+      <!-- T11 ja T12: suodattimet -->
+      <div class="suodattimet">
+        <div>
+          <label for="puolue">Puolue</label>
+          <select id="puolue">
+            <option value="">Kaikki puolueet</option>
+          </select>
+        </div>
+        <div>
+          <label for="vaalipiiri">Vaalipiiri</label>
+          <select id="vaalipiiri">
+            <option value="">Kaikki vaalipiirit</option>
+          </select>
+        </div>
+      </div>
       <p id="virhe" class="virhe" role="alert" hidden></p>
       <ul id="edustajalista" class="edustajalista" aria-label="Kansanedustajat"></ul>
       <p id="tyhja" class="tyhja" hidden>Haulla ei löytynyt edustajia.</p>

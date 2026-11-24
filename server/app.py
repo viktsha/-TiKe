@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 # Aineisto ladataan tiedostosta data/mps.json, joka on tämän tiedoston vieressä.
 # Tiedoston saa osoitteesta https://users.metropolia.fi/~peterh/mps.json
@@ -29,8 +29,21 @@ def salli_selain(vastaus):
 
 @app.route("/edustajat")
 def kaikki_edustajat():
-    """T4. Palauttaa kaikki edustajat listana."""
-    return jsonify(EDUSTAJAT)
+    """T4. Palauttaa kaikki edustajat listana.
+
+    T11. ?puolue=kok näyttää vain yhden puolueen edustajat.
+    T12. ?vaalipiiri=Helsinki näyttää vain yhden vaalipiirin edustajat.
+    Suodattimia voi käyttää yhtä aikaa. Isot ja pienet kirjaimet eivät vaikuta.
+    """
+    puolue = request.args.get("puolue", "").strip().lower()
+    vaalipiiri = request.args.get("vaalipiiri", "").strip().lower()
+
+    tulos = EDUSTAJAT
+    if puolue:
+        tulos = [e for e in tulos if e["party"].lower() == puolue]
+    if vaalipiiri:
+        tulos = [e for e in tulos if e["constituency"].lower() == vaalipiiri]
+    return jsonify(tulos)
 
 
 @app.route("/edustajat/<int:numero>")
